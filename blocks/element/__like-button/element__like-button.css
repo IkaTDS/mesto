@@ -14,5 +14,6 @@
 }
 
 .element__like-button:active {
-    outline: none;
+    background-image: url(../../../images/element-like-button-active.svg);
+    opacity: 1;
 }
