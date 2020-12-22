@@ -1,0 +1,15 @@
+.profile__button {
+    display: inline;
+    margin-left: auto;
+    box-sizing: border-box;
+    border: none;
+    width: 150px;
+    height: 50px;
+    padding: 0;
+    background-image: url(../../../images/profile-button.svg);
+    background-color: transparent;    
+}
+
+.profile__button:focus {
+    outline: none;
+}

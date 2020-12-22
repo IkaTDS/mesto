@@ -1,0 +1,14 @@
+.profile__edit-button {
+    display: inline;
+    border: none;
+    width: 24px;
+    height: 24px;
+    margin-left: 18px;
+    padding: 0;
+    background-image: url(../../../images/profile-edit-button.svg);
+    background-color: transparent;
+}
+
+.profile__edit-button:focus {
+    outline: none;
+}
