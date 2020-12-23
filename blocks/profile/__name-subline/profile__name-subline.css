@@ -6,3 +6,11 @@
     color: #fff;
     display: block;
 }
+
+@media screen and (max-width: 768px) {
+    .profile__name-subline {
+        margin-top: 14px;
+        font-size: 14px;
+        line-height: 17px;
+    }
+}

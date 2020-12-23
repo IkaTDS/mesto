@@ -2,14 +2,23 @@
     display: inline;
     margin-left: auto;
     box-sizing: border-box;
-    border: none;
+    border: 2px solid #fff;
     width: 150px;
     height: 50px;
     padding: 0;
     background-image: url(../../../images/profile-button.svg);
-    background-color: transparent;    
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .profile__button:focus {
     outline: none;
+}
+
+@media screen and (max-width: 768px) {
+    .profile__button {
+        width: 100%;
+        margin-top: 36px;
+    }
 }

@@ -2,5 +2,12 @@
     margin-top: 40px;
     display: flex;
     align-items: center;
-    max-height: 120px;
+    flex-wrap: wrap;
+}
+
+@media screen and (max-width: 768px) {
+    .profile {
+        flex-direction: column;
+        margin: 40px 19px 0;        
+    }
 }
