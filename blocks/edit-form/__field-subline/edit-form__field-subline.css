@@ -1,0 +1,19 @@
+.edit-form__field-subline {
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    margin-top: 30px;
+    padding: 0;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.edit-form__field-subline:focus {
+    outline: none;
+}
+
+@media screen and (max-width: 520px) {
+    .edit-form__field-subline {
+        margin-top: 30px;
+    }
+}
