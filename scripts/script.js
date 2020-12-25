@@ -1,34 +1,39 @@
 let profileEditButton = document.querySelector('.profile__edit-button');
 let editForm = document.querySelector('.edit-form');
 let editFormCloseButton = document.querySelector('.edit-form__close-button');
-let editFormSaveButton = document.querySelector('.edit-form__button');
-let editFormFieldName = document.querySelector('.edit-form__field-name');
-let editFormFieldSubline = document.querySelector('.edit-form__field-subline');
+let editFormWindow = document.querySelector('.edit-form__window');
+let editFormFieldName = document.querySelector('.edit-form__field[name="name"]');
+let editFormFieldSubline = document.querySelector('.edit-form__field[name="subline"]');
 let profileName = document.querySelector('.profile__name');
 let profileSubline = document.querySelector('.profile__name-subline');
 
-profileEditButton.addEventListener('click', function () {
-    editForm.classList.remove('hidden');
-});
+function showForm () {
+    editForm.classList.remove('edit-form_closed');
+    getValues();
+};
 
-editFormCloseButton.addEventListener('click', function () {
-    editForm.classList.add('hidden');
-});
+function closeForm () {
+    editForm.classList.add('edit-form_closed');
+};
 
-editFormFieldName.setAttribute('value', profileName.textContent);
-editFormFieldSubline.setAttribute('value', profileSubline.textContent);
+function getValues () {
+    editFormFieldName.value = profileName.textContent;
+    editFormFieldSubline.value = profileSubline.textContent;
+};
 
-editFormSaveButton.addEventListener('click', function () {
+function saveValues () {
     profileName.textContent = editFormFieldName.value;
     profileSubline.textContent = editFormFieldSubline.value;
-    editForm.classList.add('hidden');
-});
+}
 
-document.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === 13) {
-        evt.preventDefault();
-        profileName.textContent = editFormFieldName.value;
-        profileSubline.textContent = editFormFieldSubline.value;
-        editForm.classList.add('hidden');
-    }  
-});
+function formSubmit (evt) {
+    evt.preventDefault();
+    saveValues();
+    closeForm();
+}
+
+profileEditButton.addEventListener('click', showForm);
+
+editFormCloseButton.addEventListener('click', closeForm);
+
+editFormWindow.addEventListener('submit', formSubmit);

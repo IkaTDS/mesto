@@ -5,6 +5,10 @@
     color: #fff;
     display: inline-block;
     margin: 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 340px;
 }
 
 @media screen and (max-width: 768px) {
@@ -12,5 +16,11 @@
         font-size: 27px;
         line-height: 33px;
         margin-top: 26px;
+    }
+}
+
+@media screen and (max-width: 520px) {
+    .profile__name {
+        max-width: 188px;
     }
 }

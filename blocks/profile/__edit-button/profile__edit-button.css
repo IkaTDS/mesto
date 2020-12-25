@@ -8,6 +8,7 @@
     background-image: url(../../../images/profile-edit-button.svg);
     background-color: transparent;
     cursor: pointer;
+    vertical-align: super;
 }
 
 .profile__edit-button:focus {

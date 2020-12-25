@@ -1,4 +1,7 @@
+.hovered {
+    transition: .4;
+}
+
 .hovered:hover {
     opacity: .6;
-    transition: .4;
 }
