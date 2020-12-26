@@ -15,7 +15,6 @@
 @import url(../blocks/profile/__button/profile__button.css);
 @import url(../blocks/elements/elements.css);
 @import url(../blocks/element/element.css);
-@import url(../blocks/element/__like-button/_hovered/element__like-button_hovered.css);
 @import url(../blocks/element/__like-button/element__like-button.css);
 @import url(../blocks/element/__title/element__title.css);
 @import url(../blocks/element/__image/element__image.css);
