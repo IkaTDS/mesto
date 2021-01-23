@@ -19,6 +19,24 @@
         </form>
     </section>
 
+    <section class="item-form item-form_closed">
+        <form name="windowItemForm" method="GET" class="item-form__window">
+            <button class="item-form__close-button hovered" type="button"></button>
+            <h2 class="item-form__title">Новое место</h2>
+            <input type="text" name="name" class="item-form__field" placeholder="Название">
+            <input type="text" name="image" class="item-form__field" placeholder="Ссылка на картинку">
+            <button class="item-form__button" type="submit">Создать</button>
+        </form>
+    </section>
+
+    <section class="image-popup image-popup_closed">
+        <figure class="image-popup__window">
+            <button class="image-popup__close-button hovered" type="button"></button>
+            <img class="image-popup__image" src="#" alt="Шаблон">
+            <figcaption class="image-popup__caption"></figcaption>
+        </figure>
+    </section>
+
     <div class="page">
         <header class="header">
             <img src="./images/header-logo.svg" class="header__logo" alt="Место">
@@ -37,7 +55,7 @@
             </section>
 
             <section class="elements">
-                <div class="element">
+                <!-- <div class="element">
                     <img src="./images/element-karachaevsk.jpg" class="element__image" alt="Карачаевск">
                     <div class="element__caption">
                         <h2 class="element__title">Карачаевск</h2>
@@ -84,7 +102,7 @@
                         <h2 class="element__title">Байкал</h2>
                         <button class="element__like-button" type="button"></button>
                     </div>
-                </div>
+                </div> -->
             </section>
 
         </main>

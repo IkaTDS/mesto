@@ -1,0 +1,23 @@
+.item-form__field {
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    margin-top: 54px;
+    padding: 0 0 13px;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.item-form__field:last-of-type {
+    margin-top: 30px;
+}
+
+.item-form__field:focus {
+    outline: none;
+}
+
+@media screen and (max-width: 520px) {
+    .item-form__field {
+        margin-top: 75px;
+    }
+}

@@ -1,4 +1,4 @@
-.edit-form__close-button {
+.item-form__close-button {
     background-image: url(../../../images/close-button.svg);
     background-color: transparent;
     width: 58px;
@@ -11,12 +11,12 @@
     cursor: pointer;
 }
 
-.edit-form__close-button:focus {
+.item-form__close-button:focus {
     outline: none;
 }
 
 @media screen and (max-width: 520px) {
-    .edit-form__close-button {
+    .item-form__close-button {
         width: 31px;
         height: 31px;
         top: -38px;

@@ -1,3 +1,4 @@
 .edit-form_closed {
-    display: none;
+    visibility: hidden;
+    opacity: 0;
 }
