@@ -1,5 +1,5 @@
 .hovered {
-    transition: .4;
+    transition: .4s;
 }
 
 .hovered:hover {

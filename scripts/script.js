@@ -1,181 +1,129 @@
 // Объявление переменных
-let profileEditButton = document.querySelector('.profile__edit-button'); // кнопка редактирования профиля
-let editForm = document.querySelector('.edit-form'); // попап редактирования профиля
-let editFormCloseButton = document.querySelector('.edit-form__close-button'); // закрыть попап редактирования профиля
-let editFormWindow = document.querySelector('.edit-form__window'); // форма редактирования
-let editFormFieldName = document.querySelector('.edit-form__field[name="name"]'); // ввод имени в редактировании
-let editFormFieldSubline = document.querySelector('.edit-form__field[name="subline"]'); // ввод деятельности в редактировании
-let profileName = document.querySelector('.profile__name'); // имя на главной странице
-let profileSubline = document.querySelector('.profile__name-subline'); // деятельность на главной странице
-let elements = document.querySelector('.elements'); // список карточек
+const profileEditButton = document.querySelector('.profile__edit-button'); // кнопка редактирования профиля
+const profileName = document.querySelector('.profile__name'); // имя на главной странице
+const profileSubline = document.querySelector('.profile__name-subline'); // деятельность на главной странице
+const elementsList = document.querySelector('.elements'); // список карточек
 
-let itemAddButton = document.querySelector('.profile__button') // кнопка по открытию попап добавление карточек
-let itemForm = document.querySelector('.item-form'); // попап добавления карточек
-let itemFormCloseButton = document.querySelector('.item-form__close-button'); // закрытие папап по добавлению карточек
-let itemFormWindow = document.querySelector('.item-form__window'); // форма дообавления карточек
-let itemFormFieldName = document.querySelector('.item-form__field[name="name"]'); // ввод названия для карточки
-let itemFormFieldImage = document.querySelector('.item-form__field[name="image"]'); // ввод ссылки для карточки
+const editForm = document.querySelector('.popup_edit-form'); // попап профиля
+const editFormFieldName = document.querySelector('.popup__field_name'); // ввод имени в редактировании
+const editFormFieldSubline = document.querySelector('.popup__field_subline'); // ввод деятельности в редактировании
+const editFormWindow = document.querySelector('.popup__window_edit-form'); // форма редактирования
 
-let imagePopupCloseButton = document.querySelector('.image-popup__close-button'); // закрытие по крестику
-let imagePopup = document.querySelector('.image-popup'); // открытие попап
-let imagePopupCaption = document.querySelector('.image-popup__caption'); // подпись картинки
-let imagePopupImage = document.querySelector('.image-popup__image'); // сама картинка в попап
+const itemForm = document.querySelector('.popup_item-form'); // попап профиля
+const itemFormFieldTitle = document.querySelector('.popup__field_title'); // ввод названия для карточки
+const itemFormFieldImage = document.querySelector('.popup__field_image'); // ввод ссылки для карточки
+const itemAddButton = document.querySelector('.profile__button') // кнопка по открытию попап добавление карточек
+const itemFormWindow = document.querySelector('.popup__window_item-form'); // форма редактирования
 
-// Массив
-let initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
+const imagePopup = document.querySelector('.popup_image-popup'); // попап с картинкой
+const imagePopupCaption = document.querySelector('.popup__caption'); // подпись картинки
+const imagePopupImage = document.querySelector('.popup__image'); // сама картинка в попап
 
-initialCards.reverse ();
+const editCloseButton = document.querySelector('.popup__close-button_edit-form'); // закрытие по крестику формы редактирования
+const itemCloseButton = document.querySelector('.popup__close-button_item-form'); // закрытие по крестику формы добавления
+const imageCloseButton = document.querySelector('.popup__close-button_image-popup'); // закрытие по крестику просмотра картинки
 
-// Создание нового элемента с классом
-function createElem(tag, className) {
-  let cardElement = document.createElement(tag);
-  cardElement.classList.add(className);
+const templ = document.querySelector('.element-template'); // шаблон
 
-  return cardElement;
-}
-
-// Создание карточки
+// Создание по шаблону карточек и слушателей
 function createCard(name, link) {
-  let element = createElem('div', 'element');
-  let image = createElem('div', 'element__image');
-  let caption = createElem('caption', 'element__caption');
-  let header = createElem('header', 'element__title');
-  let like = createElem('button', 'element__like-button');
-  let trashbutton = createElem('button', 'element__trash-button');
+  const newCard = templ.content.cloneNode(true);
 
-  trashbutton.addEventListener('click', function () {
-    element.remove();
+  newCard.querySelector('.element__image').style.backgroundImage = `url(${link})`;
+  newCard.querySelector('.element__title').textContent = name;
+
+  // Лайк
+  newCard.querySelector('.element__like-button').addEventListener('click', function () {
+    this.classList.toggle('element__like-button_active')
   });
 
-  like.addEventListener('click', function () {
-    like.classList.toggle('element__like-button_active')
+  // Корзина
+  newCard.querySelector('.element__trash-button').addEventListener('click', function () {
+    this.closest('.element').remove();
   });
 
-  image.addEventListener('click', function () {
-    showImagePopup (name, link);
+  // Увеличить картинку
+  newCard.querySelector('.element__image').addEventListener('click', function () {
+    showImagePopup(name, link);
   });
 
-  image.setAttribute('alt', name);
-  image.style.backgroundImage = `url(${link})`;
-  element.append(image);
+  return newCard;
+};
 
-  header.textContent = name;
-  caption.append(header);
-
-  caption.append(like);
-
-  element.prepend(trashbutton);
-
-  element.append(caption);
-
-  elements.prepend(element);
-}
+// Добавление карточки в DOM
+function addCard(card) {
+  elementsList.prepend(card);
+};
 
 // Инициализация карточек
 function initial() {
-  initialCards.forEach(function (card) {    
-    createCard(card.name, card.link);
+  initialCards.forEach(function (card) {
+    addCard(createCard(card.name, card.link));
   });
-}
-
-// Редактирование профиля
-function showForm() {
-  editForm.classList.remove('edit-form_closed');
-  getValues();
-};
-
-function closeForm() {
-  editForm.classList.add('edit-form_closed');
-};
-
-function getValues() {
-  editFormFieldName.value = profileName.textContent;
-  editFormFieldSubline.value = profileSubline.textContent;
-};
-
-function saveValues() {
-  profileName.textContent = editFormFieldName.value;
-  profileSubline.textContent = editFormFieldSubline.value;
-};
-
-function formSubmit(evt) {
-  evt.preventDefault();
-  saveValues();
-  closeForm();
-};
-
-profileEditButton.addEventListener('click', showForm);
-
-editFormCloseButton.addEventListener('click', closeForm);
-
-editFormWindow.addEventListener('submit', formSubmit);
-
-// Добавление "нового места" //
-
-// Открытие формы
-function showItemForm() {
-  itemForm.classList.remove('item-form_closed');
-  itemFormWindow.reset();
-};
-
-// Закрытие формы
-function closeItemForm() {
-  itemForm.classList.add('item-form_closed');  
-};
-
-// Отправка формы
-function formItemSubmit(evt) {
-  evt.preventDefault();
-  createCard(itemFormFieldName.value, itemFormFieldImage.value);
-  closeItemForm();
 };
 
 // Попап с просмотром картинки по клику //
 
-// Открытие попап
+// Открытие попап с картинкой
 function showImagePopup(name, link) {
-  imagePopup.classList.remove('image-popup_closed');
+  openPopup(imagePopup);
   imagePopupImage.setAttribute('src', link);
   imagePopupImage.setAttribute('alt', name);
   imagePopupCaption.textContent = name;
 };
 
-// Закрытие попап
-function closeImagePopup() {
-  imagePopup.classList.add('image-popup_closed');  
+// Открытие попап
+function openPopup(popup) {
+  popup.classList.add('popup_opened');
 };
 
-itemAddButton.addEventListener('click', showItemForm); // Открытие попап (добавление карточки) по клику
+// Закрытие попап
+function closePopup(popup) {
+  popup.classList.remove('popup_opened');
+};
 
-itemFormCloseButton.addEventListener('click', closeItemForm); // Закрытие по клику (добавление карточки)
+// Закрытие попап с редактированием профиля
+editCloseButton.addEventListener('click', function () {
+  closePopup(editForm);
+});
+
+// Закрытие попап с добавлением карточки
+itemCloseButton.addEventListener('click', function () {
+  closePopup(itemForm);
+});
+
+// Закрытие попап с картинкой
+imageCloseButton.addEventListener('click', function () {
+  closePopup(imagePopup);
+});
+
+// Открытие попап (добавление карточки) по клику
+itemAddButton.addEventListener('click', function () {
+  openPopup(itemForm);
+});
+
+// Обработчик формы по редактированию профиля
+function formEditSubmit(evt) {
+  evt.preventDefault();
+  profileName.textContent = editFormFieldName.value;
+  profileSubline.textContent = editFormFieldSubline.value;
+  closePopup(editForm);
+};
+
+// Открытие попап редактирования профиля
+profileEditButton.addEventListener('click', function () {
+  openPopup(editForm);
+});
+
+// Обработчик формы по добавлению картинки
+function formItemSubmit(evt) {
+  evt.preventDefault();
+  addCard(createCard(itemFormFieldTitle.value, itemFormFieldImage.value));
+  closePopup(itemForm);
+};
 
 itemFormWindow.addEventListener('submit', formItemSubmit); // Отправка по клику (добавление карточки)
 
-imagePopupCloseButton.addEventListener('click', closeImagePopup); // Закрытие по клику (просмотр карточки)
+editFormWindow.addEventListener('submit', formEditSubmit);// Отправка по клику (редактирование профиля)
 
 initial(); // Вызов функции

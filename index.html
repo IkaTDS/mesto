@@ -9,31 +9,46 @@
 </head>
 
 <body class="body">
-    <section class="edit-form edit-form_closed">
-        <form name="windowForm" method="GET" class="edit-form__window">
-            <button class="edit-form__close-button hovered" type="button"></button>
+    <template class="element-template">
+        <div class="element">
+            <button class="element__trash-button" type="button" aria-label="Удалить"></button>
+            <div class="element__image" alt="Шаблон"></div>
+            <div class="element__caption">
+                <header class="element__title"></header>
+                <button class="element__like-button" type="button" aria-label="Поставить лайк"></button>
+            </div>
+        </div>
+    </template>
+
+    <section class="popup popup_edit-form">
+        <form name="windowForm" method="GET" class="popup__window popup__window_edit-form">
+            <button class="popup__close-button popup__close-button_edit-form hovered" type="button"
+                aria-label="Закрыть"></button>
             <h2 class="edit-form__title">Редактировать профиль</h2>
-            <input type="text" name="name" class="edit-form__field">
-            <input type="text" name="subline" class="edit-form__field">
-            <button class="edit-form__button" type="submit">Сохранить</button>
+            <input type="text" name="name" class="popup__field popup__field_name" placeholder="Имя" required>
+            <input type="text" name="subline" class="popup__field popup__field_subline" placeholder="О себе" required>
+            <button class="popup__button" type="submit">Сохранить</button>
         </form>
     </section>
 
-    <section class="item-form item-form_closed">
-        <form name="windowItemForm" method="GET" class="item-form__window">
-            <button class="item-form__close-button hovered" type="button"></button>
+    <section class="popup popup_item-form">
+        <form name="windowItemForm" method="GET" class="popup__window popup__window_item-form">
+            <button class="popup__close-button popup__close-button_item-form hovered" type="button"
+                aria-label="Закрыть"></button>
             <h2 class="item-form__title">Новое место</h2>
-            <input type="text" name="name" class="item-form__field" placeholder="Название">
-            <input type="text" name="image" class="item-form__field" placeholder="Ссылка на картинку">
-            <button class="item-form__button" type="submit">Создать</button>
+            <input type="text" name="title" class="popup__field popup__field_title" placeholder="Название">
+            <input type="url" name="image" class="popup__field popup__field_image" placeholder="Ссылка на картинку"
+                required>
+            <button class="popup__button" type="submit">Создать</button>
         </form>
     </section>
 
-    <section class="image-popup image-popup_closed">
-        <figure class="image-popup__window">
-            <button class="image-popup__close-button hovered" type="button"></button>
-            <img class="image-popup__image" src="#" alt="Шаблон">
-            <figcaption class="image-popup__caption"></figcaption>
+    <section class="popup popup_image-popup">
+        <figure class="popup__figure">
+            <button class="popup__close-button popup__close-button_image-popup hovered" type="button"
+                aria-label="Закрыть"></button>
+            <img class="popup__image" src="#" alt="Шаблон">
+            <figcaption class="popup__caption"></figcaption>
         </figure>
     </section>
 
@@ -48,61 +63,13 @@
                 <img src="./images/profile-avatar.jpg" class="profile__avatar" alt="Аватар">
                 <div class="profile__info">
                     <h1 class="profile__name">Жак-Ив Кусто</h1>
-                    <button class="profile__edit-button hovered" type="button"></button>
+                    <button class="profile__edit-button hovered" type="button" aria-label="Редактировать"></button>
                     <p class="profile__name-subline">Исследователь океана</p>
                 </div>
-                <button class="profile__button hovered" type="button"></button>
+                <button class="profile__button hovered" type="button" aria-label="Добавить"></button>
             </section>
 
             <section class="elements">
-                <!-- <div class="element">
-                    <img src="./images/element-karachaevsk.jpg" class="element__image" alt="Карачаевск">
-                    <div class="element__caption">
-                        <h2 class="element__title">Карачаевск</h2>
-                        <button class="element__like-button" type="button"></button>
-                    </div>
-                </div>
-
-                <div class="element">
-                    <img src="./images/element-elbrus.jpg" class="element__image" alt="Гора Эльбрус">
-                    <div class="element__caption">
-                        <h2 class="element__title">Гора Эльбрус</h2>
-                        <button class="element__like-button" type="button"></button>
-                    </div>
-                </div>
-
-                <div class="element">
-                    <img src="./images/element-dombai.jpg" class="element__image" alt="Домбай">
-                    <div class="element__caption">
-                        <h2 class="element__title">Домбай</h2>
-                        <button class="element__like-button" type="button"></button>
-                    </div>
-                </div>
-
-                <div class="element">
-                    <img src="./images/element-vyborg.jpg" class="element__image" alt="Выборг">
-                    <div class="element__caption">
-                        <h2 class="element__title">Выборг</h2>
-                        <button class="element__like-button" type="button"></button>
-                    </div>
-                </div>
-
-                <div class="element">
-                    <img src="./images/element-chelyabinskaya-oblast.jpg" class="element__image"
-                        alt="Челябинская область">
-                    <div class="element__caption">
-                        <h2 class="element__title">Челябинская область</h2>
-                        <button class="element__like-button" type="button"></button>
-                    </div>
-                </div>
-
-                <div class="element">
-                    <img src="./images/element-baikal.jpg" class="element__image" alt="Байкал">
-                    <div class="element__caption">
-                        <h2 class="element__title">Байкал</h2>
-                        <button class="element__like-button" type="button"></button>
-                    </div>
-                </div> -->
             </section>
 
         </main>
@@ -113,6 +80,7 @@
             </span>
         </footer>
     </div>
+    <script src="./scripts/initial-cards.js"></script>
     <script src="./scripts/script.js"></script>
 </body>
 
