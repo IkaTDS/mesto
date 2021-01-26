@@ -33,14 +33,10 @@ function createCard(name, link) {
   newCard.querySelector('.element__title').textContent = name;
 
   // Лайк
-  newCard.querySelector('.element__like-button').addEventListener('click', function () {
-    this.classList.toggle('element__like-button_active')
-  });
+  newCard.querySelector('.element__like-button').addEventListener('click', toggleLike);
 
   // Корзина
-  newCard.querySelector('.element__trash-button').addEventListener('click', function () {
-    this.closest('.element').remove();
-  });
+  newCard.querySelector('.element__trash-button').addEventListener('click', deleteCard);
 
   // Увеличить картинку
   newCard.querySelector('.element__image').addEventListener('click', function () {
@@ -50,15 +46,25 @@ function createCard(name, link) {
   return newCard;
 };
 
+// Переключение лайка
+function toggleLike() {
+  this.classList.toggle('element__like-button_active')
+};
+
+// Удаление карточки
+function deleteCard() {
+  this.closest('.element').remove();
+};
+
 // Добавление карточки в DOM
-function addCard(card) {
-  elementsList.prepend(card);
+function addCard(card, container) {
+  container.prepend(card);
 };
 
 // Инициализация карточек
 function initial() {
   initialCards.forEach(function (card) {
-    addCard(createCard(card.name, card.link));
+    addCard(createCard(card.name, card.link), elementsList);
   });
 };
 
@@ -103,7 +109,7 @@ itemAddButton.addEventListener('click', function () {
 });
 
 // Обработчик формы по редактированию профиля
-function formEditSubmit(evt) {
+function handleEditFormSubmit(evt) {
   evt.preventDefault();
   profileName.textContent = editFormFieldName.value;
   profileSubline.textContent = editFormFieldSubline.value;
@@ -111,19 +117,30 @@ function formEditSubmit(evt) {
 };
 
 // Открытие попап редактирования профиля
-profileEditButton.addEventListener('click', function () {
+profileEditButton.addEventListener('click', openEditForm);
+
+// Функция открытия редактирования профиля
+function openEditForm() {
   openPopup(editForm);
-});
+  getValues();
+}
+
+// Получение значений в редактирование профиля
+function getValues() {
+  editFormFieldName.value = profileName.textContent;
+  editFormFieldSubline.value = profileSubline.textContent;
+}
 
 // Обработчик формы по добавлению картинки
-function formItemSubmit(evt) {
+function handleItemFormSubmit(evt) {
   evt.preventDefault();
-  addCard(createCard(itemFormFieldTitle.value, itemFormFieldImage.value));
+  addCard(createCard(itemFormFieldTitle.value, itemFormFieldImage.value), elementsList);
   closePopup(itemForm);
+  itemFormWindow.reset();
 };
 
-itemFormWindow.addEventListener('submit', formItemSubmit); // Отправка по клику (добавление карточки)
+itemFormWindow.addEventListener('submit', handleItemFormSubmit); // Отправка по клику (добавление карточки)
 
-editFormWindow.addEventListener('submit', formEditSubmit);// Отправка по клику (редактирование профиля)
+editFormWindow.addEventListener('submit', handleEditFormSubmit);// Отправка по клику (редактирование профиля)
 
 initial(); // Вызов функции
