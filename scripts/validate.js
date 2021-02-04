@@ -1,4 +1,4 @@
-// Функция ответственная за включение валидации всех форм
+// Объект с параматрами валидации
 const configValidation = {
   formSelector: '.popup__window',
   inputSelector: '.popup__field',
