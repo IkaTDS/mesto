@@ -25,6 +25,8 @@ const imageCloseButton = document.querySelector('.popup__close-button_image-popu
 
 const templ = document.querySelector('.element-template'); // шаблон
 
+const popupsList = document.querySelectorAll('.popup'); // список переменных
+
 // Создание по шаблону карточек и слушателей
 function createCard(name, link) {
   const newCard = templ.content.cloneNode(true);
@@ -81,16 +83,31 @@ function showImagePopup(name, link) {
 // Открытие попап
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  const inputList = Array.from(popup.querySelectorAll('.popup__field'));
+  const popupbutton = popup.querySelector('.popup__button');
+  if (popup.querySelector('.popup__button')) {  
+  toggleButtonState(inputList, popupbutton, configValidation.inactiveButtonClass);
+  }
 };
 
 // Закрытие попап
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  clearError(popup);
 };
 
 // Закрытие попап с редактированием профиля
 editCloseButton.addEventListener('click', function () {
   closePopup(editForm);
+});
+
+// Закрытие попапа кликом на оверлей
+popupsList.forEach((popup) => {
+  popup.addEventListener('click', function(evt) {
+    if (evt.target === evt.currentTarget) {
+      closePopup(popup);
+    }
+  })
 });
 
 // Закрытие попап с добавлением карточки
@@ -105,7 +122,7 @@ imageCloseButton.addEventListener('click', function () {
 
 // Открытие попап (добавление карточки) по клику
 itemAddButton.addEventListener('click', function () {
-  openPopup(itemForm);
+  openItemForm(itemForm);
 });
 
 // Обработчик формы по редактированию профиля
@@ -121,15 +138,15 @@ profileEditButton.addEventListener('click', openEditForm);
 
 // Функция открытия редактирования профиля
 function openEditForm() {
-  openPopup(editForm);
   getValues();
-}
+  openPopup(editForm);  
+};
 
 // Получение значений в редактирование профиля
 function getValues() {
   editFormFieldName.value = profileName.textContent;
   editFormFieldSubline.value = profileSubline.textContent;
-}
+};
 
 // Обработчик формы по добавлению картинки
 function handleItemFormSubmit(evt) {
@@ -138,6 +155,21 @@ function handleItemFormSubmit(evt) {
   closePopup(itemForm);
   itemFormWindow.reset();
 };
+
+// Открытие формы с добавлением картинки
+function openItemForm() {
+  itemFormWindow.reset();
+  openPopup(itemForm);
+}
+
+// Закрытие формы
+document.addEventListener('keydown', function (evt) {
+  if (evt.key === "Escape") {
+  popupsList.forEach((popup) => {
+    closePopup(popup);
+  });
+}
+});
 
 itemFormWindow.addEventListener('submit', handleItemFormSubmit); // Отправка по клику (добавление карточки)
 
