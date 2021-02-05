@@ -82,18 +82,28 @@ function showImagePopup(name, link) {
 
 // Открытие попап
 function openPopup(popup) {
+  document.addEventListener('keydown', closePopupEsc);
   popup.classList.add('popup_opened');
   const inputList = Array.from(popup.querySelectorAll('.popup__field'));
-  const popupbutton = popup.querySelector('.popup__button');
-  if (popup.querySelector('.popup__button')) {  
-  toggleButtonState(inputList, popupbutton, configValidation.inactiveButtonClass);
+  const popupButton = popup.querySelector('.popup__button');
+  if (popupButton) {  
+  toggleButtonState(inputList, popupButton, configValidation.inactiveButtonClass);
   }
 };
 
 // Закрытие попап
 function closePopup(popup) {
+  document.removeEventListener('keydown', closePopupEsc);
   popup.classList.remove('popup_opened');
   clearError(popup);
+};
+
+// Закрытие попап по кнопке Esc
+function closePopupEsc(evt) {
+  let openedPopup = document.querySelector('.popup_opened')
+  if (evt.key === "Escape") {
+      closePopup(openedPopup);
+    }
 };
 
 // Закрытие попап с редактированием профиля
@@ -161,15 +171,6 @@ function openItemForm() {
   itemFormWindow.reset();
   openPopup(itemForm);
 }
-
-// Закрытие формы
-document.addEventListener('keydown', function (evt) {
-  if (evt.key === "Escape") {
-  popupsList.forEach((popup) => {
-    closePopup(popup);
-  });
-}
-});
 
 itemFormWindow.addEventListener('submit', handleItemFormSubmit); // Отправка по клику (добавление карточки)
 
