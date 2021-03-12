@@ -14,9 +14,11 @@
             <button class="popup__close-button popup__close-button_edit-form hovered" type="button"
                 aria-label="Закрыть"></button>
             <h2 class="popup__title">Редактировать профиль</h2>
-            <input type="text" name="name" id="name" class="popup__field popup__field_name" placeholder="Имя" minlength="2" maxlength="40" required>
+            <input type="text" name="name" id="name" class="popup__field popup__field_name" placeholder="Имя"
+                minlength="2" maxlength="40" required>
             <span class="popup__error" id="name-error"></span>
-            <input type="text" name="subline" id="subline" class="popup__field popup__field_subline" placeholder="О себе" minlength="2" maxlength="200" required>
+            <input type="text" name="subline" id="subline" class="popup__field popup__field_subline"
+                placeholder="О себе" minlength="2" maxlength="200" required>
             <span class="popup__error" id="subline-error"></span>
             <button class="popup__button" type="submit">Сохранить</button>
         </form>
@@ -27,9 +29,11 @@
             <button class="popup__close-button popup__close-button_item-form hovered" type="button"
                 aria-label="Закрыть"></button>
             <h2 class="popup__title">Новое место</h2>
-            <input type="text" id="title" name="title" class="popup__field popup__field_title" placeholder="Название" minlength="2" maxlength="30" required>
+            <input type="text" id="title" name="title" class="popup__field popup__field_title" placeholder="Название"
+                minlength="2" maxlength="30" required>
             <span class="popup__error" id="title-error"></span>
-            <input type="url" id="image" name="image" class="popup__field popup__field_image" placeholder="Ссылка на картинку" required>
+            <input type="url" id="image" name="image" class="popup__field popup__field_image"
+                placeholder="Ссылка на картинку" required>
             <span class="popup__error" id="image-error"></span>
             <button class="popup__button" type="submit">Создать</button>
         </form>
@@ -83,8 +87,7 @@
         </div>
     </template>
     <script src="./scripts/initial-cards.js"></script>
-    <script src="./scripts/script.js"></script>
-    <script src="./scripts/validate.js"></script>
+    <script src="./scripts/index.js" type="module"></script>
 </body>
 
 </html>
