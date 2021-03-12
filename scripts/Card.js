@@ -15,18 +15,31 @@ export class Card {
         return this._element;
     }
 
+    _closePopupEscape() {
+        function closeImagePopup(evt) {
+            let openedPopup = document.querySelector('.popup_opened');
+            if(evt.key === 'Escape') {
+                document.removeEventListener('keydown', closeImagePopup);
+                openedPopup.classList.remove('popup_opened');
+              }
+        }
+
+        document.addEventListener('keydown', closeImagePopup);
+    }
+
     _setEventListeners() {
         this._element.querySelector('.element__like-button').addEventListener('click', () => {
             this._handleLikeCard();
         });
         this._element.querySelector('.element__image').addEventListener('click', () => {
-            this._showImagePopup();            
+            this._showImagePopup();
+            this._closePopupEscape();            
         });
         this._element.querySelector('.element__trash-button').addEventListener('click', () => {
             this._handleDeleteCard();
         });
     }
-    
+
     _handleLikeCard() {
         this._element.querySelector('.element__like-button').classList.toggle('element__like-button_active');
     }
