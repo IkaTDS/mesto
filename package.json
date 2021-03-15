@@ -1,0 +1,19 @@
+{
+  "name": "mesto",
+  "version": "0.0.1",
+  "description": "* Описание проекта\r * Инструкция\r * Сайт",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IkaTDS/mesto.git"
+  },
+  "author": "Irakliy Dochviri",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IkaTDS/mesto/issues"
+  },
+  "homepage": "https://github.com/IkaTDS/mesto#readme"
+}
