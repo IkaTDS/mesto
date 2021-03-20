@@ -15,14 +15,14 @@ const imagePopup = document.querySelector(".popup_image-popup");
 const popupsList = document.querySelectorAll(".popup"); // список переменных
 
 import "../pages/index.css";
-import { FormValidator, configValidation } from "./FormValidator.js";
-import { Card } from "./Card.js";
-import { Section } from "./Section.js";
-import { Popup } from "./Popup.js";
-import { PopupWithImage } from "./PopupWithImage.js";
-import { PopupWithForm } from "./PopupWithForm.js";
-import { UserInfo } from "./UserInfo.js";
-import { initialCards } from "./initial-cards.js";
+import { FormValidator, configValidation } from "../components/FormValidator.js";
+import { Card } from "../components/Card.js";
+import { Section } from "../components/Section.js";
+import { Popup } from "../components/Popup.js";
+import { PopupWithImage } from "../components/PopupWithImage.js";
+import { PopupWithForm } from "../components/PopupWithForm.js";
+import { UserInfo } from "../components/UserInfo.js";
+import { initialCards } from "../components/initial-cards.js";
 
 const cardsList = new Section(
   {
