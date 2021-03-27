@@ -5,8 +5,8 @@ export class Section {
     this._containerSelector = containerSelector;
   }
 
-  initial() {
-    this._items.forEach((item) => {
+  initial(data) {
+    data.forEach((item) => {
       this._renderer(item);
     });
   }
