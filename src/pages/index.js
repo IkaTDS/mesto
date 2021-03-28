@@ -46,17 +46,15 @@ const userInfo = new UserInfo({
   userSublineSelector: profileSubline,
 });
 
-api.getUserInfo().then((user) => {
-  userInfo.setUserInfo(user);
-  userInfo.setUserAvatar(user.avatar);
-});
-
-api.getInitialCards().then((data) => {
-  cardsList.initial(data);
-});
-
-const popupWithImage = new PopupWithImage(imagePopup);
-popupWithImage.setEventListners();
+Promise.all([
+  api.getUserInfo().then((user) => {
+    userInfo.setUserInfo(user);
+    userInfo.setUserAvatar(user.avatar);
+  }),
+  api.getInitialCards().then((data) => {
+    cardsList.initial(data);
+  }),
+]);
 
 function createCard(cardInfo) {
   const card = new Card(
@@ -100,7 +98,7 @@ itemAddButton.addEventListener("click", () => {
 
 // Открытие попап редактирования профиля
 profileEditButton.addEventListener("click", () => {
-  getValues();
+  setValues();
   editWindow.open();
   editProfileFormValidator.toggleButtonState();
   editProfileFormValidator.clearError();
@@ -113,22 +111,18 @@ avatarEditButton.addEventListener("click", () => {
 });
 
 // Получение значений в редактирование профиля
-function getValues() {
+function setValues() {
   const profile = userInfo.getUserInfo();
   editFormFieldName.value = profile.name;
   editFormFieldSubline.value = profile.about;
 }
-
-const popupDeleteItem = new PopupWithDelete(deletePopup);
-
-popupDeleteItem.setEventListners();
 
 function handleDeleteItem(card) {
   popupDeleteItem.open(() => {
     api
       .deleteCard(card._cardInfo._id)
       .then(() => {
-        card._handleDeleteCard();
+        card.handleDeleteCard();
         popupDeleteItem.close();
       })
       .catch((err) => {
@@ -142,18 +136,30 @@ function handleCardLike(card, data) {
     ? api.deleteLike(data._id)
     : api.addLike(data._id);
 
-  like.then((data) => {
-    card.addLike(data);
-  });
+  like
+    .then((data) => {
+      card.addLike(data);
+    })
+    .catch((err) => {
+      console.log(`${err}`);
+    });
 }
 
-const popupAddCard = new PopupWithForm(itemForm, (card) => {
+const popupWithImage = new PopupWithImage(".popup_image-popup");
+
+popupWithImage.setEventListners();
+
+const popupDeleteItem = new PopupWithDelete(".popup_item-delete");
+
+popupDeleteItem.setEventListners();
+
+const popupAddCard = new PopupWithForm(".popup_item-form", (card) => {
   popupAddCard.loading(true);
   api
     .addCard(card)
     .then((res) => {
       const itemElement = createCard(res);
-      elementsList.prepend(itemElement);
+      cardsList.addItem(itemElement);
       popupAddCard.close();
     })
     .catch((err) => {
@@ -163,7 +169,7 @@ const popupAddCard = new PopupWithForm(itemForm, (card) => {
 
 popupAddCard.setEventListners();
 
-const editWindow = new PopupWithForm(editForm, (item) => {
+const editWindow = new PopupWithForm(".popup_edit-form", (item) => {
   editWindow.loading(true);
   api
     .editProfile(item)
@@ -178,7 +184,7 @@ const editWindow = new PopupWithForm(editForm, (item) => {
 
 editWindow.setEventListners();
 
-const popupAvatar = new PopupWithForm(avatarPopup, (item) => {
+const popupAvatar = new PopupWithForm(".popup_avatar-edit", (item) => {
   popupAvatar.loading(true);
   api
     .editAvatar(item)
