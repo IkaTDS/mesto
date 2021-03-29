@@ -46,15 +46,15 @@ const userInfo = new UserInfo({
   userSublineSelector: profileSubline,
 });
 
-Promise.all([
-  api.getUserInfo().then((user) => {
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([user, data]) => {
     userInfo.setUserInfo(user);
     userInfo.setUserAvatar(user.avatar);
-  }),
-  api.getInitialCards().then((data) => {
     cardsList.initial(data);
-  }),
-]);
+  })
+  .catch((err) => {
+    console.log(`${err}`);
+  });
 
 function createCard(cardInfo) {
   const card = new Card(
